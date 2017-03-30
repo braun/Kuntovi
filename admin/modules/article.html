@@ -1,0 +1,20 @@
+<i class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top"
+   onclick="w3_open()"></i>
+<a href="javascript:void(0)" class="w3-red w3-button w3-right w3-margin-top w3-margin-right"
+   ng-click="saveArticle()"><i class="fa fa-pencil"></i></a>
+
+<div class="w3-container person">
+    <form class="w3-container">
+        <label class="w3-label">Název:</label><input type="text" class="w3-input" ng-model="article.header.title">
+        <label class="w3-label">Souhrn:</label>
+        <textarea class="w3-input" ng-model="article.header.summary"></textarea>
+        <label class="w3-label">Text:</label>
+        <textarea class="w3-input" ng-model="article.body" style="width: 100%" ui-tinymce="tinymceOptions"></textarea>
+        <label class="w3-label">Titulní foto:</label>
+        <input id="file" type="file" class="w3-input" accept="image/*"  custom-on-change="fotoSelected">
+        <img ng-src="{{titlePhoto}}" style="max-width: 100%">
+        <label class="w3-label">Přidat do galerie:</label>
+        <input id="fileg" type="file" class="w3-input" accept="image/*"  custom-on-change="gallerySelected" multiple>
+        <img ng-repeat="galit in gallery" ng-src="{{galit.photo}}" style="max-width: 100%">
+    </form>
+</div>

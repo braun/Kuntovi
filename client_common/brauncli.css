@@ -1,0 +1,16 @@
+.container-toast
+{
+    position: fixed;
+    text-align: center;
+    bottom: 50px;
+    width: 100%;
+}
+
+.toast-text {
+    min-width: 5em;
+    display: inline-block;
+    border-radius: 5px;
+    color: white;
+    background-color: gray;
+    border: 1px solid gray;
+}

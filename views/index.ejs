@@ -1,0 +1,62 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/w3.css">
+    <script src="angular/angular.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <title>Kuntovi</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+        body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+<body class="w3-light-orange">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+    <!-- Header -->
+    <header class="w3-container w3-center w3-padding-32">
+        <h1>Kuntovic <b>OB</b>log</h1>
+        <p>Proč bychom nebloudili <span class="w3-tag">celá rodina</span></p>
+
+        <% for(key in headfotos) {
+            var foto = headfotos[key]; %>
+
+        <img class="headfoto " style="width:100%" src="<%= foto.relativeUrl %>">
+
+        <% }; %>
+        <script>
+            w3.slideshow(".headfoto", 4000);
+        </script>
+    </header>
+
+    <% for(key in articles)
+    {
+        var article = articles[key];
+    %>
+    <div class="w3-card-4 w3-margin w3-white">
+        <img src="<%= article.getTitlePhotoUrl() %>" alt="Brodec" style="width:100%">
+        <div class="w3-container w3-padding-8">
+            <h3><b><%= article.header.title %></b></h3>
+            <h5><%= article.header.summary %>, <span class="w3-opacity"><%= article.printDate() %></span></h5>
+        </div>
+
+        <div class="w3-container">
+            <!--<p><%= article.header.text %></p>-->
+            <div class="w3-row">
+                <div class="w3-col m8 s12">
+                    <p><a class="w3-button w3-padding-large w3-white w3-border" href="article/<%= article.name %>"><b>VÍCE
+                                »</b></a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <% }; %>
+</div>
+</body>
+</html>
