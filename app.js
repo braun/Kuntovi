@@ -7,18 +7,20 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var article = require('./routes/article');
-var datasource = require('./data/datasource');
+
 var app = express();
 var articleConstructor = require('./businessDomain/article');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+var PouchDB = require('pouchdb');
+var mydb = PouchDB('articles');
+app.use('/db', require('express-pouchdb')(PouchDB));
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json({limit: '5mb'}));
-app.use(bodyParser.urlencoded({extended: false}));
+//app.use(bodyParser.json({limit: '5mb'}));
+//app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));

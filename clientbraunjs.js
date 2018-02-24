@@ -3,3 +3,6 @@
  */
 var braunjs = require("./braunjs");
 window.braunjs = braunjs;
+var pouchdb = require("pouchdb");
+window.pouchdb = pouchdb;
+window.moment = require("moment");
