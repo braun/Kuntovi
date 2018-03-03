@@ -1,0 +1,44 @@
+@tablet: ~"screen and (min-width: 15cm)";
+@desktop: ~"screen and (min-width: 33cm)";
+@desktopw: ~"screen and (min-width: 40cm)";
+.gallery
+{
+    display: flex;
+    flex-flow: row wrap;
+    
+    div
+    {
+        padding: 2px;
+        align-self: center;
+        flex: 0 0 100%;
+        @media @tablet
+        {
+            flex: 0 0 50%;
+            padding: 5px;
+        }
+        @media @desktop
+        {
+            flex: 0 0  33.333%;
+            padding: 10px;
+        }
+        @media @desktopw
+        {
+            flex: 0 0 25%;
+            padding: 10px;
+        }
+        position: relative;
+        img
+        {
+            width:100%;
+        }
+        .buttons
+        {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right:0;
+            top:0;
+            z-index: 1000;
+        }
+    }
+}

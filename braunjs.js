@@ -10,6 +10,17 @@ module.exports =
             var rv = moment(date).format("D.M.YYYY");
             return rv;
         },
+        formatDbId: function(prefix)
+        {
+            var rv = "";
+            var rnd = Math.random()*0x10000;
+            var dates = moment().format("YYDDMMHHmmSS");
+            if(prefix != null)
+                rv = prefix + "_";
+            rv += dates;
+            rv+= "_"+rnd.toFixed(0);
+            return rv;
+        },
         isString: function(val)
         {
             return typeof val === "string";

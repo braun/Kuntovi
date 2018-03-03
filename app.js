@@ -13,9 +13,18 @@ var articleConstructor = require('./businessDomain/article');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-var PouchDB = require('pouchdb');
+
+var mkdirp   = require('mkdirp');
+mkdirp.sync("./db");
+var PouchDB = require('pouchdb').defaults({ prefix: './db/'});
+PouchDB.plugin(require('pouchdb-find'));
+
+
+
+app.use('/content', require('express-pouchdb')(PouchDB));
+
 var mydb = PouchDB('articles');
-app.use('/db', require('express-pouchdb')(PouchDB));
+console.log(mydb.adapter);
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -26,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'client_common')));
 app.use(express.static(path.join(__dirname, 'build')));
+
 // app.cache
 var c = require('appcache-node');
 // generate a cache file
@@ -47,7 +57,6 @@ var cacheFile = c.newCache(
         "/angular-ui-tinymce/src/tinymce.js",
         "/brauncli.css",
         "/brauncli.js",
-        "/braunjs.js",
         "/admin/admin.js",
         "/admin/modules/article.js",
         "/admin/router.js",
@@ -69,7 +78,7 @@ app.use(article);
 
 
 // map datasource
-datasource.setupApp(app);
+//datasource.setupApp(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

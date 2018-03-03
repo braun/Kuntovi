@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" manifest="admin.appcache">
+<html lang="en" >
 <head>
     <base href="/admin/"></base>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/w3.css">
     <link rel="stylesheet" href="/brauncli.css">
+    <link rel="stylesheet/less" href="styles.less">
     <script type="text/javascript" src="/tinymce/tinymce.js"></script>
     <script type="text/javascript" src="/angular/angular.js"></script>
     <script type="text/javascript" src="/angular-ui-router/release/angular-ui-router.js"></script>
@@ -13,10 +14,11 @@
     <script type="text/javascript" src="/angular-loading-bar/src/loading-bar.js"></script>
     <script type="text/javascript" src="/angular-ui-tinymce/src/tinymce.js"></script>
     <script type="text/javascript" src="/brauncli.js"></script>
-    <script type="text/javascript" src="/braunjs.js"></script>
+    <script type="text/javascript" src="/clientbrauncli.js"></script>
     <script type="text/javascript" src="admin.js"></script>
     <script type="text/javascript" src="modules/article.js"></script>
-    <script type="text/javascript" src="router.js"></script>
+    <script type="text/javascript" src="router.js"></script> 
+    <script type="text/javascript" src="/less.js"></script> 
 
 
 
@@ -41,13 +43,13 @@
     <a href="javascript:void(0)" onclick="w3_close()" title="Close Sidemenu"
        class="w3-bar-item w3-button w3-hide-large w3-large">Zavřít <i class="fa fa-remove"></i></a>
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-dark-grey w3-button w3-hover-black w3-left-align"
-       onclick="document.getElementById('id01').style.display='block'">Nový článek <i
+       ng-click="newArticle();">Nový článek <i
             class="w3-padding-left fa fa-pencil"></i></a>
     <a id="myBtn" onclick="myFunc('lastWorkContainer')" href="javascript:void(0)" class="w3-bar-item w3-button"><i
             class="fa fa-inbox w3-padding-right"></i>Poslední články<i class="w3-padding-left fa fa-caret-down"></i></a>
     <div id="lastWorkContainer" class="w3-hide w3-animate-left">
-        <a ng-repeat="article in lastWork" href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-           ng-click="showArticleEditor(article)">
+        <a ng-repeat="article in lastWork track by article._id" href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
+           ng-click="showArticleEditor(article);">
             <div >
                <!-- <img class="w3-round w3-margin-right" ng-src="/{{article.titlePhoto.relativeUrl}}" style="width:30%;">-->
                 <div
@@ -59,7 +61,7 @@
     </div>
     <a href="#" class="w3-bar-item w3-button"><i class="fa fa-paper-plane w3-padding-right"></i>Uložit</a>
     <a href="#" class="w3-bar-item w3-button"><i class="fa fa-hourglass-end w3-padding-right"></i>Rozpracované</a>
-    <a href="#" class="w3-bar-item w3-button"><i class="fa fa-trash w3-padding-right"></i>Smazat</a>
+    <a href="#" class="w3-bar-item w3-button"  ng-click="clearDb();"><i class="fa fa-trash w3-padding-right"></i>Smazat</a>
 </nav>
 
 <!-- Modal that pops up when you click on "New Message" -->
@@ -140,8 +142,8 @@
 </script>
 
 <script>
-    var openTab = document.getElementById("firstTab");
-    openTab.click();
+   // var openTab = document.getElementById("firstTab");
+  //  openTab.click();
 </script>
 
 </body>

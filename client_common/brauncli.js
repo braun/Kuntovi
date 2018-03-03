@@ -92,7 +92,7 @@ function toast(toast)
     var span = document.createElement('div');
     span.innerHTML = toast;
     div.className="container-toast";
-    span.className = "toast-text w3-opacity"
+    span.className = "toast-text w3-opacity" 
     div.appendChild(span);
     document.body.appendChild(div);
     window.setTimeout(function()
