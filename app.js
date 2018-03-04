@@ -9,22 +9,17 @@ var index = require('./routes/index');
 var article = require('./routes/article');
 
 var app = express();
+
 var articleConstructor = require('./businessDomain/article');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-var mkdirp   = require('mkdirp');
-mkdirp.sync("./db");
-var PouchDB = require('pouchdb').defaults({ prefix: './db/'});
-PouchDB.plugin(require('pouchdb-find'));
 
 
+var datasource = require("./db/datasource");
 
-app.use('/content', require('express-pouchdb')(PouchDB));
 
-var mydb = PouchDB('articles');
-console.log(mydb.adapter);
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -78,7 +73,7 @@ app.use(article);
 
 
 // map datasource
-//datasource.setupApp(app);
+datasource.setupApp(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

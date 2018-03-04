@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var datasource = require("../data/datasource");
+var datasource = require("../db/datasource");
 var articleConstructor = require('../businessDomain/article');
 /* GET article detail. */
 router.get('/article/:articleId', function(req, res, next) {
