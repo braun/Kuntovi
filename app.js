@@ -1,3 +1,6 @@
+
+var branding = "branding-kuntovi";
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -10,14 +13,17 @@ var article = require('./routes/article');
 
 var app = express();
 
+var efunc =console.error;
+console.error = function(arg)
+{
+    efunc.bind(this)(arg);
+}
 var articleConstructor = require('./businessDomain/article');
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 
 
-var datasource = require("./db/datasource");
+
+
 
 
 // uncomment after placing your favicon in /public
@@ -26,11 +32,14 @@ app.use(logger('dev'));
 //app.use(bodyParser.json({limit: '5mb'}));
 //app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+var datasource = require("./db/datasource");
+
 app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'client_common')));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname,branding )));
 
+// admin app setup
 // app.cache
 var c = require('appcache-node');
 // generate a cache file
@@ -67,6 +76,11 @@ app.get("/admin/admin.appcache", function (r, s) {
     return s.end(cacheFile);
 });
 app.use("/admin", express.static(path.join(__dirname, 'admin')));
+
+
+// view engine & routes setup
+app.set('views', path.join(__dirname, branding));
+app.set('view engine', 'ejs');
 app.use('/', index);
 app.use(article);
 

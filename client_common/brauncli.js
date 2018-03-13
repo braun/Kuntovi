@@ -83,6 +83,60 @@ function resizeImage(blob,maxWidth,maxHeight,callback)
 
 }
 
+/**
+ * checks image size and resizes it using hermit-resize to specified with and height when needed
+ * @param blob - image
+ * @param maxWidth - maximal widthw hen oversized by image resize of image will be performed
+ * @param maxHeight - maximal height when oversized by image resize of image will be performed
+ * @param callback callback resized image as parametter
+ */
+function resizeImageHermit(blob,maxWidth,maxHeight,callback)
+{
+    var urlCreator = window.URL || window.webkitURL;
+    var imageUrl = urlCreator.createObjectURL(blob);
+
+    var image = new Image();
+    image.src = imageUrl;
+
+    image.onload = function () {
+        var width = image.width;
+        var height = image.height;
+        var shouldResize = (width > maxWidth) || (height > maxHeight);
+
+        if (!shouldResize) {
+           callback(blob);
+            return;
+        }
+
+        var newWidth;
+        var newHeight;
+
+        if (width > height) {
+            newHeight = height * (maxWidth / width);
+            newWidth = maxWidth;
+        } else {
+            newWidth = width * (maxHeight / height);
+            newHeight = maxHeight;
+        }
+        var canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        var context = canvas.getContext('2d');        
+        context.drawImage(this, 0, 0, width, height);
+        
+        var HERMITE = new HermitResize();
+        HERMITE.resample(canvas, newWidth, newHeight,true,function()
+        {
+            canvas.toBlob(callback, "image/jpeg", 0.95);
+        });
+            
+    };
+
+    image.onerror = function () {
+        callback(null);
+    };
+
+}
 
 function toast(toast)
 {

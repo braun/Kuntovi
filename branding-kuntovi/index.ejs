@@ -8,53 +8,44 @@
         
             <title>Kuntovi</title>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-            <link rel="stylesheet" href="glyphter-font/css/kuntaci.css">
-            <link rel="stylesheet" href="stylesheets/style.css">
-            <style>
-                body,
-                h1,
-                h2,
-                h3,
-                h4,
-                h5 {
-                    font-family: "Raleway", sans-serif
-                }
-            </style>
+            <link rel="stylesheet" href="/glyphter-font/css/kuntaci.css">
+            <link rel="stylesheet/less" href="/article.less">
+            <link rel="stylesheet" href="/style.css">
+            <script type="text/javascript" src="/less.js"></script>
         </head>
-      
+        
         
         <body>
         
             <header>
                 <div class="topmenu var1">
+                    <a href="/" class="homeAnchor">
+                        <img src="/orilogo.png">
+                    </a>
                     <ul>
-                        <li>Závody</li>
-                        <li>Myšlenky</li>
-                        <li>Fotky</li>
+                        <li><a href="/category/comp">Závody</a></li>
+                        <li><a href="/category/though">Myšlenky</a></li>
+                        <li><a href ="/category/foto">Fotky</a></li>
                     </ul>
                 </div>
                 <div class="title">
                     <span class="black">OB</span>
                     <span class="white">Log</span>
                 </div>
-                <img class="frameLogo" src="public/images/orilogoFrame.png">
-                <img class="banner" src="data/headfotos/panoramaW.jpg">
-               <!-- <script>
-                        w3.slideshow(".headfoto", 4000);
-                    </script>
-                </header>-->
+                <img class="frameLogo" src="/orilogoFrame.png">
+                <img class="banner" src="/panoramaW.jpeg">
             </header>
             <div class="news">
                     <% for(ar in articles)
                     {
                         var article = articles[ar];
                     %>
-                <div class="item var2 ">
+                <a class="item var2 " href="/article/<%=article._id %>">
                     <div>
                         <p><%= article.header.title %></p>
                     </div>
-                    <img src="<%= article.getTitlePhotoUrl() %>">
-                </div>
+                    <img src="/<%= article.getTitlePhotoUrl() %>">
+                </a>
                  <% } %>
             <!--    <div class="item var2">
                     

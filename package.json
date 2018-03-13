@@ -16,11 +16,14 @@
     "fauxton": "^1.1.13",
     "fs-extra": "^2.1.2",
     "fs-promise": "^2.0.0",
+    "hermite-resize": "git+https://github.com/viliusle/Hermite-resize.git",
     "moment": "^2.17.1",
     "morgan": "~1.7.0",
     "multiparty": "^4.1.3",
     "pouchdb": "^6.4.3",
+    "pouchdb-authentication": "^1.1.2",
     "pouchdb-find": "^6.4.3",
+    "pouchdb-validation": "^4.0.0",
     "serve-favicon": "~2.3.2"
   }
 }

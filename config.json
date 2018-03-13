@@ -1,5 +1,8 @@
 {
   "couchdb": {
     "uuid": "dbe35d0f-9a84-46cf-920a-eafb2db869a5"
+  },
+  "admins": {
+    "root": "-pbkdf2-a77515cb4f4531c8629558078b709109dd0c9bbe,1d51791ce13a1011b91981a916314f13910f1c71dd12513d,10"
   }
 }

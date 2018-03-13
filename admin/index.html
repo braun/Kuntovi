@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
     <base href="/admin/"></base>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/w3.css">
+    <link rel="stylesheet" href="w3.css">
     <link rel="stylesheet" href="/brauncli.css">
     <link rel="stylesheet/less" href="styles.less">
     <script type="text/javascript" src="/tinymce/tinymce.js"></script>
@@ -13,18 +14,25 @@
     <link rel="stylesheet" href="/angular-loading-bar/src/loading-bar.css">
     <script type="text/javascript" src="/angular-loading-bar/src/loading-bar.js"></script>
     <script type="text/javascript" src="/angular-ui-tinymce/src/tinymce.js"></script>
+
+    <script type="text/javascript" src="bundle.js"></script>
     <script type="text/javascript" src="/brauncli.js"></script>
-    <script type="text/javascript" src="/clientbrauncli.js"></script>
     <script type="text/javascript" src="admin.js"></script>
     <script type="text/javascript" src="modules/article.js"></script>
-    <script type="text/javascript" src="router.js"></script> 
-    <script type="text/javascript" src="/less.js"></script> 
+    <script type="text/javascript" src="router.js"></script>
+    <script type="text/javascript" src="/less.js"></script>
 
 
 
 
     <style>
-        html, body, h1, h2, h3, h4, h5 {
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
             font-family: "RobotoDraft", "Roboto", sans-serif;
         }
 
@@ -33,118 +41,141 @@
         }
     </style>
 </head>
+
 <body ng-app="app" ng-controller="topController">
 
-<!-- Side Navigation -->
-<nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:320px;"
-     id="mySidebar">
-    <a href="/" class="w3-bar-item w3-button  w3-large" style="background-color: #a5cc96"><img
-            src="/images/adminlogo.png" ></a>
-    <a href="javascript:void(0)" onclick="w3_close()" title="Close Sidemenu"
-       class="w3-bar-item w3-button w3-hide-large w3-large">Zavřít <i class="fa fa-remove"></i></a>
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-dark-grey w3-button w3-hover-black w3-left-align"
-       ng-click="newArticle();">Nový článek <i
-            class="w3-padding-left fa fa-pencil"></i></a>
-    <a id="myBtn" onclick="myFunc('lastWorkContainer')" href="javascript:void(0)" class="w3-bar-item w3-button"><i
-            class="fa fa-inbox w3-padding-right"></i>Poslední články<i class="w3-padding-left fa fa-caret-down"></i></a>
-    <div id="lastWorkContainer" class="w3-hide w3-animate-left">
-        <a ng-repeat="article in lastWork track by article._id" href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-           ng-click="showArticleEditor(article);">
-            <div >
-               <!-- <img class="w3-round w3-margin-right" ng-src="/{{article.titlePhoto.relativeUrl}}" style="width:30%;">-->
-                <div
-                    class="w3-opacity w3-large ">{{article.header.title}}<br>
-                <span  class="w3-opacity w3-medium w3-right-align">{{printDate(article.header.date)}}</span></div>
-            </div>
+    <!-- Side Navigation -->
+    <nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-left w3-card-2" style="z-index:3;width:320px;" id="mySidebar">
+        <a href="/" class="w3-bar-item w3-button  w3-large" style="background-color: #a5cc96">
+            <img src="/adminlogo.png">
         </a>
+        <a href="javascript:void(0)" onclick="w3_close()" title="Close Sidemenu" class="w3-bar-item w3-button w3-hide-large w3-large">Zavřít
+            <i class="fa fa-remove"></i>
+        </a>
+        <a href="#" class="w3-bar-item w3-button loginBoxLabel w3-grey w3-button w3-hover-black "
+          onclick="myFunc('loginBox');" href="javascript:void(0)">
+                <i class="fa fa-user w3-padding-right" ng-class="{ 'alert': isLoginAlert()  }"></i>Přihlašovací údaje
+                <i class="w3-padding-left fa fa-caret-down"></i></a>
+       
 
-    </div>
-    <a href="#" class="w3-bar-item w3-button"><i class="fa fa-paper-plane w3-padding-right"></i>Uložit</a>
-    <a href="#" class="w3-bar-item w3-button"><i class="fa fa-hourglass-end w3-padding-right"></i>Rozpracované</a>
-    <a href="#" class="w3-bar-item w3-button"  ng-click="clearDb();"><i class="fa fa-trash w3-padding-right"></i>Smazat</a>
-</nav>
+            <div id="loginBox" class="loginBox">
 
-<!-- Modal that pops up when you click on "New Message" -->
-<div id="id01" class="w3-modal" style="z-index:4">
-    <div class="w3-modal-content w3-animate-zoom">
-        <div class="w3-container w3-padding w3-red">
-       <span onclick="document.getElementById('id01').style.display='none'"
-             class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
-            <h2>Send Mail</h2>
+
+                <label>Uživatel:</label>
+                <input type="text" ng-model="userName">
+                <br>
+                <label>Heslo:</label>
+                <input type="password" ng-model="userPassword">
+                <br>
+                <button class="w3-button" ng-click="doUserLogin()">Nastavit</button>
+            </div>
         </div>
-        <div class="w3-panel">
-            <label>To</label>
-            <input class="w3-input w3-border w3-margin-bottom" type="text">
-            <label>From</label>
-            <input class="w3-input w3-border w3-margin-bottom" type="text">
-            <label>Subject</label>
-            <input class="w3-input w3-border w3-margin-bottom" type="text">
-            <input class="w3-input w3-border w3-margin-bottom" style="height:150px" placeholder="What's on your mind?">
-            <div class="w3-section">
-                <a class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'">Cancel  <i
-                        class="fa fa-remove"></i></a>
-                <a class="w3-button w3-right" onclick="document.getElementById('id01').style.display='none'">Send  <i
-                        class="fa fa-paper-plane"></i></a>
+        </div>
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-dark-grey w3-button w3-hover-black w3-left-align" ng-click="newArticle();">Nový článek
+            <i class="w3-padding-left fa fa-pencil"></i>
+        </a>
+        <a id="myBtn" onclick="myFunc('lastWorkContainer')" href="javascript:void(0)" class="w3-bar-item w3-button">
+            <i class="fa fa-inbox w3-padding-right"></i>Poslední články
+            <i class="w3-padding-left fa fa-caret-down"></i>
+        </a>
+        <div id="lastWorkContainer" class="w3-hide w3-animate-left">
+            <a ng-repeat="article in lastWork track by article._id" href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
+                ng-click="showArticleEditor(article);">
+                <div>
+                    <!-- <img class="w3-round w3-margin-right" ng-src="/{{article.titlePhoto.relativeUrl}}" style="width:30%;">-->
+                    <div class="w3-opacity w3-large ">{{article.header.title}}
+                        <br>
+                        <span class="w3-opacity w3-medium w3-right-align">{{printDate(article.header.date)}}</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        <a href="#" class="w3-bar-item w3-button">
+            <i class="fa fa-paper-plane w3-padding-right"></i>Uložit</a>
+        <a href="#" class="w3-bar-item w3-button">
+            <i class="fa fa-hourglass-end w3-padding-right"></i>Rozpracované</a>
+        <a href="#" class="w3-bar-item w3-button" ng-click="clearDb();">
+            <i class="fa fa-trash w3-padding-right"></i>Smazat</a>
+    </nav>
+
+    <!-- Modal that pops up when you click on "New Message" -->
+    <div id="id01" class="w3-modal" style="z-index:4">
+        <div class="w3-modal-content w3-animate-zoom">
+            <div class="w3-container w3-padding w3-red">
+                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-red w3-right w3-xxlarge">
+                    <i class="fa fa-remove"></i>
+                </span>
+                <h2>Send Mail</h2>
+            </div>
+            <div class="w3-panel">
+                <label>To</label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text">
+                <label>From</label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text">
+                <label>Subject</label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text">
+                <input class="w3-input w3-border w3-margin-bottom" style="height:150px" placeholder="What's on your mind?">
+                <div class="w3-section">
+                    <a class="w3-button w3-red" onclick="document.getElementById('id01').style.display='none'">Cancel
+                        <i class="fa fa-remove"></i>
+                    </a>
+                    <a class="w3-button w3-right" onclick="document.getElementById('id01').style.display='none'">Send
+                        <i class="fa fa-paper-plane"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Overlay effect when opening the side navigation on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
-     title="Close Sidemenu" id="myOverlay"></div>
+    <!-- Overlay effect when opening the side navigation on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="Close Sidemenu"
+        id="myOverlay"></div>
 
-<!-- Page content -->
-<div  id="mainView" class="w3-main" ui-view="mainView" style="margin-left:320px;">
-
+    <!-- Page content -->
+    <div id="mainView" class="w3-main" ui-view="mainView" style="margin-left:320px;">
 
 
-</div>
-<script>
-    var openInbox = document.getElementById("myBtn");
-  //openInbox.click();
 
-    function w3_open() {
-        document.getElementById("mySidebar").style.display = "block";
-        document.getElementById("myOverlay").style.display = "block";
-    }
-    function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
-        document.getElementById("myOverlay").style.display = "none";
-    }
+    </div>
+    <script>
+        var openInbox = document.getElementById("myBtn");
+        //openInbox.click();
 
-    function myFunc(id) {
-        var x = document.getElementById(id);
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-            x.previousElementSibling.className += " w3-red";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
-            x.previousElementSibling.className =
-                x.previousElementSibling.className.replace(" w3-red", "");
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
         }
-    }
 
-    openMail("Borge")
-    function openMail(personName) {
-//        var i;
-//        var x = document.getElementsByClassName("person");
-//        for (i = 0; i < x.length; i++) {
-//            x[i].style.display = "none";
-//        }
-//        x = document.getElementsByClassName("test");
-//        for (i = 0; i < x.length; i++) {
-//            x[i].className = x[i].className.replace(" w3-light-grey", "");
-//        }
-//        document.getElementById(personName).style.display = "block";
-//        event.currentTarget.className += " w3-light-grey";
-    }
-</script>
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
 
-<script>
-   // var openTab = document.getElementById("firstTab");
-  //  openTab.click();
-</script>
+      
+
+        openMail("Borge")
+
+        function openMail(personName) {
+            //        var i;
+            //        var x = document.getElementsByClassName("person");
+            //        for (i = 0; i < x.length; i++) {
+            //            x[i].style.display = "none";
+            //        }
+            //        x = document.getElementsByClassName("test");
+            //        for (i = 0; i < x.length; i++) {
+            //            x[i].className = x[i].className.replace(" w3-light-grey", "");
+            //        }
+            //        document.getElementById(personName).style.display = "block";
+            //        event.currentTarget.className += " w3-light-grey";
+        }
+    </script>
+
+    <script>
+        // var openTab = document.getElementById("firstTab");
+        //  openTab.click();
+    </script>
 
 </body>
+
 </html>

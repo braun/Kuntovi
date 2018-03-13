@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Kuntovi</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <script type="text/javascript" src="/article.js"></script>
+    <link rel="stylesheet/less" href="/article.less">
+    <script type="text/javascript" src="/less.js"></script>
+</head>
+
+
+<body>
+
+    <header>
+        <div class="topmenu var1">
+            <a href="/" class="homeAnchor">
+                <img src="/orilogo.png">
+            </a>
+            <ul>
+                <li><a href="/category/comp">Závody</a></li>
+                <li><a href="/category/though">Myšlenky</a></li>
+                <li><a href ="/category/foto">Fotky</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="wrapper"><div class="set1">
+            <div class="title">
+                <div class="banner">
+                    <img src="/<%=article.getTitlePhotoUrl() %>" id="bannerImage">
+                </div>
+                <div class="summary">
+                    <h1 class="white">
+                        <%= article.header.title %>
+                    </h1>
+                    <p>
+                        <%= article.header.summary %>
+                            <p>
+                </div>
+            </div>
+
+
+            <div class="content">
+                <%- article.body %>
+            </div>
+        </div><div class="set2">
+            <div class="gallery">
+                <% for(key in gallery)
+                 {
+                     var item = gallery[key];
+                 %>
+
+                    <div class="galitem">
+                        <img src="/<%= item.getSrcUrl() %>" onmouseover="changeBanner(this);">
+                    </div>
+                    <%
+                 }
+                 %>
+            </div>
+        </div>
+    </div>
+    <!-- <script>
+                        w3.slideshow(".headfoto", 4000);
+                    </script>
+                </header>-->
+
+
+
+</body>
+
+</html>

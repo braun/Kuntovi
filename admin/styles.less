@@ -34,11 +34,73 @@
         .buttons
         {
             display: flex;
-            flex-direction: column;
+            flex-direction:row;
             position: absolute;
             right:0;
             top:0;
             z-index: 1000;
         }
+    
     }
+ 
+}
+
+.categories
+{
+  
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    div
+    {
+        padding-left: 15px;
+    }
+    .categorySelected
+    {
+        background: black!important; 
+    }
+}
+.checkboxes
+{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.loginBoxLabel
+{
+  
+     .alert
+     {
+         color: red;      
+         animation: blinker 1s linear infinite;          
+          
+          @keyframes blinker {
+            50% {
+              opacity: 0;
+            }
+          }
+     }      
+}
+.loginBox
+{
+    background: white;
+  display:none;
+    label
+    {
+        display: inline-block;
+        width:40%;
+    }
+    input
+    {
+        display: inline-block;
+        width:50%;
+        margin:5px;
+    }
+    
+    padding: 10px;
 }

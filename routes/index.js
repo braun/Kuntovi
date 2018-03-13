@@ -18,5 +18,16 @@ router.get('/', function(req, res, next) {
       });
   });
 
-
+  router.get('/category/:category', function(req, res, next) {
+    
+         datasource.getArticles(null,10,articleConstructor,[req.params.category]).then
+         ((articles) => {
+             console.log(JSON.stringify(articles,2));
+             res.render('index', {articles: articles});
+         }).catch((err)=>
+         {
+             console.error(err);
+             res.render('error',{error: err})
+         });
+     });
 module.exports = router;

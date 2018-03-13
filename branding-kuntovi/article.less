@@ -1,0 +1,77 @@
+@import "common.less";
+
+
+    .title
+    {
+       
+        position: relative;
+        .banner
+        {
+           
+            img
+            {
+                border: 1px solid @colorMain;
+                width:100%;
+            }
+        }
+        .summary
+        {
+           
+            position: absolute;
+            padding: 2*@stdpadding;
+            left:0px;
+            bottom:0px;
+            color: @colorInverse;
+            width:100%;
+            background: rgba(0, 0, 0, 0.5);
+            h1
+            {
+                height: 1cm;
+                              
+            }
+        }
+
+      
+    }
+    
+.wrapper
+{
+    .set1
+    {
+        @media @desktop
+        {
+            width: 70%;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+    .set2
+    {
+        @media @desktop
+        {
+            border: 1px solid @colorMain;
+            width: 30%;
+            display: inline-block;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+    }
+}
+
+.gallery
+{
+   
+    .galitem
+    {
+        img {
+            width:100%;
+           
+            box-sizing: border-box;
+        }
+    }
+}
+.content
+{
+    padding: @stdpadding;
+}
+

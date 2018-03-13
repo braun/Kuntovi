@@ -12,12 +12,12 @@ if(proto != null)
       return braunjs.printDate(this.header.date);
   }
 
-  this.getTitlePhotoUrl = function()
+  this.getSrcUrl = function()
     {
-        if(this._attachments == null || this._attachments.title_photo == null)
+        if(this._attachments == null || this._attachments.image == null)
             return "default.png";
 
-        return "content/articles/"+this._id+"/title_photo";
+        return "content/images/"+this._id+"/image";
     }
 }
 
