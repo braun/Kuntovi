@@ -5,10 +5,10 @@ export PWD=$4
 export JSON_PWD=\"$PWD\"
 export SHOST="http://$ROOT:$PWD@$HOST:$PORT"
 echo $JSON_PWD
-curl -X PUT $HOST/articles
-curl -X PUT $HOST/images
+curl -X PUT $HOST:$PORT/articles
+curl -X PUT $HOST:$PORT/images
 
-curl -X PUT $SHOST/_config/admins/$ROOT -d $JSON_PWD
+curl -X PUT $HOST:$PORT/_config/admins/$ROOT -d $JSON_PWD
 
 curl -X PUT $SHOST/_users/org.couchdb.user:braunie \
      -H "Accept: application/json" \
