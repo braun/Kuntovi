@@ -1,8 +1,9 @@
 export HOST=$1
-export ROOT=$2
-export PWD=$3
+export PORT=$2
+export ROOT=$3
+export PWD=$4
 export JSON_PWD=\"$PWD\"
-export SHOST="http://$ROOT:$PWD@$HOST"
+export SHOST="http://$ROOT:$PWD@$HOST:$PORT"
 echo $JSON_PWD
 curl -X PUT $HOST/articles
 curl -X PUT $HOST/images
