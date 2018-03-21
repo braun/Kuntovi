@@ -43,7 +43,7 @@ $scope.setCategory = function(category)
 
 
             });
-        });
+        },true);
 
 
     };

@@ -14,6 +14,6 @@ curl -X PUT $SHOST/_users/org.couchdb.user:braunie \
      -H "Content-Type: application/json" \
      -d '{"name": "braunie", "password": "vrkumr74", "roles": [ "blogger"], "type": "user"}'
 
-xcurl -X POST $SHOST/articles \
+curl -X POST $SHOST/articles \
 -H 'content-type:application/json' \
 -d $'{"_id":"_design/only_correct_user","validate_doc_update":"function (newDoc, oldDoc, userCtx) {console.error(userCtx.name);\\nif (userCtx.roles.indexOf(\'_admin\') == -1 && newDoc.user != userCtx.name) {\\nconsole.error(newDoc.user);throw({forbidden : \\"doc.user must be the same as your username.\\"});\\n}\\n}"}'

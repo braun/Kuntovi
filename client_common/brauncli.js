@@ -90,8 +90,9 @@ function resizeImage(blob,maxWidth,maxHeight,callback)
  * @param maxHeight - maximal height when oversized by image resize of image will be performed
  * @param callback callback resized image as parametter
  */
-function resizeImageHermit(blob,maxWidth,maxHeight,callback)
+function resizeImageHermit(blob,maxWidth,maxHeight,callback,lockAspect)
 {
+   
     var urlCreator = window.URL || window.webkitURL;
     var imageUrl = urlCreator.createObjectURL(blob);
 
@@ -110,9 +111,18 @@ function resizeImageHermit(blob,maxWidth,maxHeight,callback)
 
         var newWidth;
         var newHeight;
+        var startx = 0;
+        var starty = 0;
 
         if (width > height) {
+            if(lockAspect)
+            {
+                var reducedheight = width*(maxHeight/maxWidth);
+                starty = (height-reducedheight)/2;
+                height = reducedheight;
+            }
             newHeight = height * (maxWidth / width);
+            
             newWidth = maxWidth;
         } else {
             newWidth = width * (maxHeight / height);
@@ -122,7 +132,7 @@ function resizeImageHermit(blob,maxWidth,maxHeight,callback)
         canvas.width = width;
         canvas.height = height;
         var context = canvas.getContext('2d');        
-        context.drawImage(this, 0, 0, width, height);
+        context.drawImage(this, -startx, -starty, width, height+starty);
         
         var HERMITE = new HermitResize();
         HERMITE.resample(canvas, newWidth, newHeight,true,function()
