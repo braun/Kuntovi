@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
  
       datasource.getArticles(null,10,articleConstructor).then
       ((articles) => {
-          console.log(JSON.stringify(articles,2));
+      //    console.log(JSON.stringify(articles,2));
           res.render('index', {articles: articles});
       }).catch((err)=>
       {

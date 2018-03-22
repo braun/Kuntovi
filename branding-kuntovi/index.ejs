@@ -43,6 +43,7 @@
                 <a class="item var2 " href="/article/<%=article._id %>">
                     <div>
                         <p><%= article.header.title %></p>
+                        <span class="date"><%= article.printDate() %></span>
                     </div>
                     <img src="/<%= article.getTitlePhotoUrl() %>">
                 </a>
