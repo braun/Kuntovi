@@ -22,14 +22,19 @@
         </div>
         <label class="w3-label">Titulní foto:</label>
         <input id="file" type="file" class="w3-input" accept="image/*" custom-on-change="fotoSelected" ng-disabled="article == null">
-        <img ng-src="{{titlePhoto}}" style="max-width: 100%">
+        <div class="gallery">
+            <div class="item">
+                <div class="buttons" ng-show='showButtonsTitlePhoto()'><button class="w3-button w3-blue " ng-click="editTitlePhoto()"><span class="fa fa-pencil"></span></button></div>
+                <img id="titlePhoto" ng-src="{{titlePhoto}}" style="max-width: 100%">
+            </div>
+        </div>
         <br>
         <label class="w3-label">Přidat do galerie:</label>
         <input id="fileg" type="file" class="w3-input" accept="image/*" custom-on-change="gallerySelected" multiple ng-disabled="article == null">
         <div class="gallery">
-            <div ng-repeat="galit in gallery">
-                <div class="buttons"><button class="w3-button w3-blue " ng-click="deleteGalleryItem(galit)"><span class="fa fa-trash-o"></span></div>
-                <img ng-src="{{galit.url}}" >
+            <div class="item" ng-repeat="galit in gallery">
+                <div class="buttons" ng-show='showButtonsPhoto(galit)'><button class="w3-button w3-blue " ng-click="editPhoto(galit)"><span class="fa fa-pencil"></span></button><button class="w3-button w3-blue " ng-click="deleteGalleryItem(galit)"><span class="fa fa-trash-o"></span></button></div>
+                <img id="{{galit.doc._id}}" ng-src="{{galit.url}}" >
             </div>
         </div>
 

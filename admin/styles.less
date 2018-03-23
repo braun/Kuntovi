@@ -1,12 +1,35 @@
 @tablet: ~"screen and (min-width: 15cm)";
 @desktop: ~"screen and (min-width: 33cm)";
 @desktopw: ~"screen and (min-width: 40cm)";
+
+
+.darkroom-container
+{
+    overflow: auto;
+    width:100%;
+    display: block;
+    position: fixed;
+    top: 0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    margin: auto;
+    background: rgba(200, 200, 200, 0.9);
+    padding: 2cm;
+    z-index: 2000;
+    text-align: center;
+}
+.darkroom-toolbar
+{
+    top: 10px;
+    left: 10px;
+}
 .gallery
 {
     display: flex;
     flex-flow: row wrap;
     
-    div
+    .item
     {
         padding: 2px;
         align-self: center;
@@ -37,8 +60,13 @@
             flex-direction:row;
             position: absolute;
             right:0;
-            top:0;
+            top:2px;
             z-index: 1000;
+
+            button
+            {
+                margin-left:1px;
+            }
         }
     
     }

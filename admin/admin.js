@@ -76,6 +76,7 @@ var dbc = function () {
         imgdb.replicate.to(remoteimg);
     }
 
+   
 
     function setTitlePhoto(article, photoBlob) {
 
@@ -178,12 +179,16 @@ var dbc = function () {
             var articles = res.rows;
             for (var articleid in articles) {
                 var imgdoc = articles[articleid];
-                getImage(imgdoc.doc, function (url) {
-                    callback({
-                        doc: imgdoc.doc,
-                        url: url
-                    });
-                })
+               var fn = function(imgdoc)
+                {
+                    getImage(imgdoc.doc, function (url) {
+                        callback({
+                            doc: imgdoc.doc,
+                            url: url
+                        });
+                    })
+                };
+                fn(imgdoc);
             }
         }).catch(
             function (err) {

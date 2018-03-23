@@ -1,3 +1,5 @@
+
+
 /**
  * Created by stani on 20.03.2017.
  */
@@ -94,7 +96,9 @@ function resizeImageHermit(blob,maxWidth,maxHeight,callback,lockAspect)
 {
    
     var urlCreator = window.URL || window.webkitURL;
-    var imageUrl = urlCreator.createObjectURL(blob);
+    var imageUrl = 
+       blob instanceof URL ? blob :
+        urlCreator.createObjectURL(blob);
 
     var image = new Image();
     image.src = imageUrl;

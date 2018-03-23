@@ -24,7 +24,81 @@ $scope.setCategory = function(category)
     else
         $scope.article.categories.splice(idx,1);
 }
+    $scope.editTitlePhoto = function()
+    {
+        var el = document.getElementById("#titlePhoto");
+        $scope.isTitlePhotoEdited = true;
+       var dkrm = new Darkroom('#titlePhoto',
+            {
+              
+                    saveCallback:  function() {
+                         dkrm.originalImageElement.style.display = "block";
+                        var e = dkrm.canvas.getElement();
+                            e.toBlob(function(blob)
+                            {
+                                $scope.$apply(function () {
+                                    var urlCreator = window.URL || window.webkitURL;
+                                    var imageUrl = urlCreator.createObjectURL(blob);
+                                    $scope.db.setTitlePhoto($scope.article, blob);
+                                    $scope.setTitlePhoto(imageUrl);
+                                    $scope.isTitlePhotoEdited = false;
+                    
+                                });
+                            }, "image/jpeg", 0.95);
+                        }
+                    
+                
+            });    
+    }
 
+    $scope.showButtonsTitlePhoto = function()
+    {
+        return $scope.titlePhoto != null && $scope.isTitlePhotoEdited == false; 
+    }
+    $scope.showButtonsPhoto = function(photo)
+    {
+        return !photo.isEdited; 
+    }
+    $scope.editPhoto = function(id)
+    {
+           
+            var el = document.getElementById("#"+id.doc._id);
+            id.isEdited = true;
+            var dkrm = new Darkroom("#"+id.doc._id,
+                 {
+                   
+                         saveCallback:  function() {
+                            id.isEdited = false;
+                             dkrm.originalImageElement.style.display = "block";
+                             var e = dkrm.canvas.getElement();
+                                 e.toBlob(function(blob)
+                                 {
+                                    resizeImageHermit(blob, 320, 180, function (thumb) {
+                                        if (thumb == null) {
+                                            toast("Nepodařilo se vytvořit náhled obrázku");
+                                            return;
+                                        }
+                        
+                        
+                                        var urlCreator = window.URL || window.webkitURL;
+                                        var imageUrl = urlCreator.createObjectURL(blob);
+                        
+                                        $scope.db.setImage(id.doc, blob, thumb, function (imgDoc) {
+                                            $scope.$apply(function () {
+
+                                                id.doc = imgDoc;
+                                                id.url = dkrm.originalImageElement.src;
+                                            });
+                                        });
+                        
+                        
+                                    });
+                                 }, "image/jpeg", 0.95);
+                             }
+                         
+                     
+                 });      
+    }
     $scope.fotoSelected = function () {
         var file = event.target.files[0];
         if (file == null)
