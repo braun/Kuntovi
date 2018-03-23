@@ -17,7 +17,7 @@ if(proto != null)
         if(this._attachments == null || this._attachments.image == null)
             return "default.png";
 
-        return "content/images/"+this._id+"/image";
+        return "content/images/"+this._id+"/thumb";
     }
 }
 
