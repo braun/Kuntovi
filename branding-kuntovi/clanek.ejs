@@ -4,9 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Kuntovi</title>
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <script type="text/javascript" src="/article.js"></script>
     <link rel="stylesheet/less" href="/article.less">
+    
     <script type="text/javascript" src="/less.js"></script>
 </head>
 
@@ -45,20 +47,39 @@
                 <%- article.body %>
             </div>
         </div><div class="set2">
-            <div class="gallery">
+            <div id="sidegallery" class="sidegallery">
                 <% for(key in gallery)
                  {
                      var item = gallery[key];
                  %>
 
                     <div class="galitem">
-                        <img src="/<%= item.getSrcUrl() %>" onmouseover="changeBanner(this);">
+                        <img class="galimg" src="/<%= item.getSrcUrl() %>"  onclick="showGallery(this,true);">
                     </div>
                     <%
                  }
                  %>
             </div>
         </div>
+    </div>
+    <div id="gallery" class="gallery">
+        <div class="buttons">
+                <span class="button fa  fa-step-backward" onclick="prevGalleryImage();"></span>
+                <span class="button fa  fa-step-forward" onclick="nextGalleryImage();"></span>
+               
+                <span class="button fa  fa-play" onclick="playGallery();"></span>
+                <span class="button fa  fa-pause" onclick="pauseGallery();"></span>
+                <span>  </span>
+                <span class="button fa fa-2x fa-times" onclick="closeGallery();"></span>           
+        </div>
+       <div id="gcanvascontainer" class="container">
+            <div class="buttons">
+                    <span id="btExpand" class="button fa  fa-expand" onclick="maximizeGalleryImage();"></span>                 
+                    <span id="btCompress" class="button fa  fa-compress hidden" onclick="minimizeGalleryImage();"></span>                 
+            </div>
+            <img id="gcanvas">
+        </div>
+       
     </div>
     <!-- <script>
                         w3.slideshow(".headfoto", 4000);

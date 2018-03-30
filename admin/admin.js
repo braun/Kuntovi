@@ -309,7 +309,8 @@ app.controller('topController', ['$rootScope', '$scope', '$state', "$http", func
         // toast("Ukladam");
         //saveLs($scope.article);
         if ($scope.article._id == null) {
-            $scope.article.idbase = braunjs.formatDbId();
+            if($scope.article.idbase == null)
+               $scope.article.idbase = braunjs.formatDbId();
             $scope.article._id = "article_" + $scope.article.idbase;
         }
         $scope.article.user = 'braunie';

@@ -2,12 +2,16 @@
 <a href="javascript:void(0)" class="w3-red w3-button w3-right w3-margin-top w3-margin-right" ng-click="saveArticle()">
     <i class="fa fa-save"></i>
 </a>
-
+<a href="javascript:void(0)" class="w3-yellow w3-button w3-right w3-margin-top w3-margin-right" ng-click="toggleAdvancedVisible()">
+        <i class="fa fa-elipsis-v"></i>
+    </a>
+    
 <div class="w3-container person">
     <form class="w3-container">
         <label class="w3-label">Název:</label>
         <input type="text" class="w3-input" ng-model="article.header.title" ng-disabled="article == null">
-   
+        <label class="w3-label" ng-show="advancedvisible">ID:</label>
+        <input type="text" class="w3-input" ng-show="advancedvisible" ng-model="article.idbase" ng-disabled="article == null">
         <label class="w3-label">Souhrn:</label>
         <textarea class="w3-input" ng-model="article.header.summary" ng-disabled="article == null"></textarea>
         <label class="w3-label">Text:</label>

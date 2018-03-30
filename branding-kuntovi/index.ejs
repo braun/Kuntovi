@@ -12,6 +12,7 @@
             <link rel="stylesheet/less" href="/article.less">
             <link rel="stylesheet" href="/style.css">
             <script type="text/javascript" src="/less.js"></script>
+            <script type="text/javascript" src="/brauncli.js"></script>
         </head>
         
         
@@ -33,7 +34,14 @@
                     <span class="white">Log</span>
                 </div>
                 <img class="frameLogo" src="/orilogoFrame.png">
-                <img class="banner" src="/panoramaW.jpeg">
+                <% for(key in banners)
+                {
+                    var item = banners[key];
+                %>
+                    <img class="banner" src="/<%= item.getSrcUrl() %>">
+                <%
+                }
+                %>
             </header>
             <div class="news">
                     <% for(ar in articles)
@@ -56,6 +64,9 @@
                     </div>
                     <img src="public/images/alpy.jpg">
                 </div>-->
+                <script>
+                  carousel("banner",4);
+                </script>
             </div>
         </body>
         

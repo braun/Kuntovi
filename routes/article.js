@@ -8,6 +8,7 @@ router.get('/article/:articleId', function (req, res, next) {
     var articleId = req.params.articleId;
     console.log("get article id: " + articleId);
     var article = null;
+
     datasource.getArticle(articleId, articleConstructor).then((art) => {
         console.log(JSON.stringify(article, 2));
         if (art == null) {
@@ -15,12 +16,13 @@ router.get('/article/:articleId', function (req, res, next) {
             res.statusMessage = "OOOOOPPPSSSS";
             return;
         }
-        article = art;
+        article = art;       
         return datasource.getGallery(article.idbase, galeryItemConstructor);
     }).then((gallery) => {
         res.render('clanek', {
             article: article,
             gallery: gallery
+         
         });
     }).catch((err) => {
         console.error(err);

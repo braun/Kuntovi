@@ -168,3 +168,24 @@ function toast(toast)
         document.body.removeChild(div);
     },2000);
 }
+
+
+
+function carousel(slideClass,intervalSecs) {
+   
+        var slideIndex = 0;
+    
+        function carouselInternal()
+        {
+            var i;
+            var x = document.getElementsByClassName(slideClass);
+            for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none"; 
+            }
+            slideIndex++;
+            if (slideIndex > x.length) {slideIndex = 1} 
+            x[slideIndex-1].style.display = "block"; 
+            setTimeout(carouselInternal, intervalSecs*1000); // Change image every 2 seconds
+        }
+        carouselInternal();
+}

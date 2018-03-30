@@ -99,6 +99,16 @@ $scope.setCategory = function(category)
                      
                  });      
     }
+    $scope.toggleAdvancedVisible = function()
+    {
+        $scope.advancedvisible = !$scope.advancedvisible;
+        if(!$scope.advancedvisible)
+        {
+            $scope.article._rev = null;
+              $scope.article._id = null;
+                $scope.saveArticle();
+        }
+    }
     $scope.fotoSelected = function () {
         var file = event.target.files[0];
         if (file == null)

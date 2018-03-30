@@ -57,9 +57,10 @@
             overflow-y: auto;
         }
     }
+    
 }
 
-.gallery
+.sidegallery
 {
    
     .galitem
@@ -69,11 +70,108 @@
            
             box-sizing: border-box;
             border-bottom: 1px solid @colorMain;
+            &::hover
+            {
+                cursor: pointer;
+            }
         }
     }
+}
+.gallery
+{
+    display:none;
+    width:100%;
+    height: 100%;
+    position: fixed;
+    left:0px;
+    top:0px;
+    background: rgba(0,0,0,0.9);
+    text-align: center;    
+    img
+    {
+      
+        border: 1px solid white;        
+        width:100%;
+            
+        &.portrait
+        {
+            width:100%;
+            height:unset;
+       
+            @media @tablet
+            {
+             width:unset;
+             height:90%;
+            }
+        }
+        
+      
+        &.maximizedimg
+        {
+            display: unset;
+            height: unset;
+            width:100%;
+          
+        }
+    }
+    .buttons
+    {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        align-items: center;
+        right:2px;
+        top:2px;
+        .button
+        {
+            background: rgba(0,0,0,0.6);
+            color:white;
+            padding: 10px;
+          
+            &.hidden
+            {
+                display: none;
+            }
+        }
+    }
+    .container
+    {
+        position: relative;
+        width:unset;
+        height:unset;
+        vertical-align: middle;
+        display: inline-block;
+       
+        margin-top:2cm;
+        @media @tablet
+        {
+          margin:1cm;
+          margin-top:2cm;
+        }
+        &.maximized
+        {
+            border: 0px;
+            margin: 0;
+            position: fixed;
+            left:0px;
+            top:0px;
+            margin-top:0px;
+            float: unset;
+            height: 100%;
+            width:100%;
+            z-index: 2500;
+            overflow-y: auto;
+        }
+    }
+    
+    z-index: 2000;
 }
 .content
 {
     padding: @stdpadding;
 }
 
+
+.noscroll {
+    overflow: hidden;
+}
