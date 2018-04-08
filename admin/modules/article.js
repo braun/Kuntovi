@@ -124,7 +124,7 @@ $scope.setCategory = function(category)
                 var imageUrl = urlCreator.createObjectURL(blob);
                 $scope.db.setTitlePhoto($scope.article, blob);
                 $scope.setTitlePhoto(imageUrl);
-
+                $scope.isTitlePhotoEdited = false;
 
             });
         },true);
