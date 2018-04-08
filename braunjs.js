@@ -14,7 +14,7 @@ module.exports =
         {
             var rv = "";
             var rnd = Math.random()*0x10000;
-            var dates = moment().format("YYDDMMHHmmSS");
+            var dates = moment().format("YYMMDDHHmmSS");
             if(prefix != null)
                 rv = prefix + "_";
             rv += dates;
