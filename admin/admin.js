@@ -273,7 +273,7 @@ app.controller('topController', ['$rootScope', '$scope', '$state', "$http", func
     function loadLastWork() {
         db.db.allDocs({
             include_docs: true,
-            limit: 5,
+            limit: 10,
             descending: true
         }).then(function (res) {
             $scope.$apply(() => {

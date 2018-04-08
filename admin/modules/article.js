@@ -53,7 +53,7 @@ $scope.setCategory = function(category)
 
     $scope.showButtonsTitlePhoto = function()
     {
-        return $scope.titlePhoto != null && $scope.isTitlePhotoEdited == false; 
+        return $scope.titlePhoto != null && !$scope.isTitlePhotoEdited; 
     }
     $scope.showButtonsPhoto = function(photo)
     {
