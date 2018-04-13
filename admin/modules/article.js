@@ -105,7 +105,7 @@ $scope.setCategory = function(category)
         if(!$scope.advancedvisible)
         {
             $scope.article._rev = null;
-              $scope.article._id = null;
+            //  $scope.article._id = null;
                 $scope.saveArticle();
         }
     }
