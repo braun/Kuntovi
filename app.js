@@ -1,6 +1,7 @@
 
-var branding = "branding-kuntovi";
 
+var config = require('./config/nodeConfig.js');
+var branding = config.branding;
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -12,18 +13,15 @@ var index = require('./routes/index');
 var article = require('./routes/article');
 
 var app = express();
-
+app.config = config;
+var datasource = require(config.dataSource);
+app.dataSource = datasource;
 var efunc =console.error;
 console.error = function(arg)
 {
-    efunc.bind(this)(arg);
+    efunc.bind(this)(arg.stack);
 }
 var articleConstructor = require('./businessDomain/article');
-
-
-
-
-
 
 
 // uncomment after placing your favicon in /public
@@ -33,9 +31,10 @@ app.use(logger('dev'));
 //app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
-var datasource = require("./db/datasource");
 
-app.use(express.static(path.join(__dirname, 'bower_components')));
+
+
+app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(express.static(path.join(__dirname, 'client_common')));
 app.use(express.static(path.join(__dirname,branding )));
 

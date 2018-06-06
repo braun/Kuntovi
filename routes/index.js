@@ -1,13 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var datasource = require("../db/datasource");
+
+
 var articleConstructor = require('../businessDomain/article');
 var galeryItemConstructor = require('../businessDomain/galleryItem');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
  var banners = [];
-
+ var app=require("../app");
+ var datasource = app.dataSource;
   datasource.getGallery("titlegallery", galeryItemConstructor)
   .then((banns)=> {
         banners = banns;
@@ -25,7 +27,7 @@ router.get('/', function(req, res, next) {
 
   router.get('/category/:category', function(req, res, next) {
     var banners = [];
-    
+    var datasource = app.dataSource;
       datasource.getGallery("titlegallery", galeryItemConstructor)
     .then((banns)=> {
         banners = banns;

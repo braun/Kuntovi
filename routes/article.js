@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var datasource = require("../db/datasource");
+
 var articleConstructor = require('../businessDomain/article');
 var galeryItemConstructor = require('../businessDomain/galleryItem');
 /* GET article detail. */
 router.get('/article/:articleId', function (req, res, next) {
+    var app=require("../app");
     var articleId = req.params.articleId;
     console.log("get article id: " + articleId);
     var article = null;
-
+    var datasource = app.dataSource;
     datasource.getArticle(articleId, articleConstructor).then((art) => {
         console.log(JSON.stringify(article, 2));
         if (art == null) {
