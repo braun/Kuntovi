@@ -6,6 +6,7 @@ data
 *~
 .*~
 .vscode
-db/
+db/articles
+db/images
 log.txt
 config
