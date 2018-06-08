@@ -4,12 +4,12 @@ export PWD=$3
 export PREFIX=$4
 export JSON_PWD=\"$PWD\"
 export SHOST="http://$ROOT:$PWD@$HOST"
-export ARTICLES_DB=$HOST/${PREFIX}_articles
-export IMAGES_DB=$HOST/${PREFIX}_images
+export ARTICLES_DB=$SHOST/${PREFIX}_articles
+export IMAGES_DB=$SHOST/${PREFIX}_images
 
 echo $JSON_PWD
 curl -X PUT $ARTICLES_DB
-curl -X PUT $HOST/$IMAGES_DB
+curl -X PUT $IMAGES_DB
 
 curl -X PUT $HOST/_config/admins/$ROOT -d $JSON_PWD
 
