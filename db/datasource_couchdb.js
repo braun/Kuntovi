@@ -29,6 +29,10 @@ var datasource = {
                 req.url = req.url.replace("/content/articles","");                
                 proxy.web(req, res, {target: articlesUrl});
             });
+	app.all("/content/*",function(req,res) {
+		req.url = req.originalUrl.replace("/content","");
+		proxy.web(req,res,{target: couch._baseUrl});
+	});
             //
             // Listen for the `error` event on `proxy`.
             proxy.on('error', function (err, req, res) {
