@@ -4,7 +4,7 @@
          dataSource: './db/datasource_couchdb.js',
         couchOpts: {
     
-            host: '10.0.0.42',
+            host: 'www.kuntaci.cz',
             protocol: 'http',
             port: 5984,
           //  auth: {

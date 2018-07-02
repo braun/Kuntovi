@@ -16,14 +16,46 @@ h5 {
 body {
     margin: 0px;
     padding: 0px;
+    
 }
- 
+
 div {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
  
+div::-webkit-scrollbar {
+    width: 1em;
+  
+}
+ 
+div::-webkit-scrollbar-track {
+    background: @colorInverse;
+  //  border: 1px solid @colorMain;
+}
+ 
+div::-webkit-scrollbar-thumb {
+  background-color: @colorMain;
+  border: 1px solid multiply(@colorMain,rgb(200,200,200));
+}
+
+ 
+body::-webkit-scrollbar {
+    width: 1em;
+  
+}
+ 
+body::-webkit-scrollbar-track {
+    background: @colorInverse;
+  //  border: 1px solid @colorMain;
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: @colorMain;
+  border: 1px solid multiply(@colorMain,rgb(200,200,200));
+}
+
 .topmenu {
     position: relative;
     margin:0;
@@ -72,4 +104,27 @@ div {
     {
         color:white;
     }
+}
+.formbutton
+{
+    border-radius: 2px;
+    display: inline-block;
+    color:@colorInverse;
+    border: 1px solid @colorMain;
+    padding: 3*@stdpadding;
+    cursor: pointer;
+    background-image: radial-gradient(multiply(@colorMain,#dddddd),@colorMain);
+    vertical-align: middle;
+   
+}
+.overlayContainer
+{
+    width:100%;
+    height: 100%;
+    position: fixed;
+    left:0px;
+    top:0px;
+    background: rgba(0,0,0,0.9);
+    text-align: center;    
+    z-index: 1000;
 }

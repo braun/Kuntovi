@@ -2,8 +2,8 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Rodinný blog zejména o orientačním běhu">.
-    <meta name="keywords" content="orientační běh, blog, orienteering, sport,rodina">.
+    <meta name="description" content="Rodinný blog zejména o orientačním běhu">
+    <meta name="keywords" content="orientační běh, blog, orienteering, sport,rodina">
     <meta http-equiv="Content-language" content="cs">
     <title>Kuntovi</title>
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
@@ -12,11 +12,9 @@
     <link rel="stylesheet/less" href="/article.less">
     
     <script type="text/javascript" src="/less.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
-
-
 <body>
-
     <header>
         <div class="topmenu var1">
             <a href="/" class="homeAnchor">
@@ -29,10 +27,28 @@
             </ul>
         </div>
     </header>
+    <script>
+        function showComments(showc)
+        {
+            var btshowcom = document.getElementById("btshowcom");
+            var btshowgal = document.getElementById("btshowgal");
+            var sidegallery = document.getElementById("sidegallery");
+            var sidecommentary = document.getElementById("sidecommentary");
+
+            btshowcom.style.display = !showc ? "inline-block": "none";
+            btshowgal.style.display = showc ? "inline-block": "none";
+            sidegallery.style.display = !showc ? null: "none";
+            sidecommentary.style.display = showc ? null: "none";
+        }
+    </script>
     <div class="wrapper"><div class="set1">
             <div class="title">
-                <div class="banner">
+                <div class="banner middle">
                     <img src="/<%=article.getTitlePhotoUrl() %>" id="bannerImage">
+                </div>
+                <div class="infos">
+                    <span class="button" id="btshowcom" onclick="showComments(true)">Komentáře</span>
+                    <span class="button" id="btshowgal" onclick="showComments(false)" style="display:none">Galerie</span>
                 </div>
                 <div class="summary">
                     <h1 class="white">
@@ -62,12 +78,44 @@
                  }
                  %>
             </div>
+            <div id="sidecommentary" class="sidecommentary">  
+                    <div class="header">
+                        <span class="formbutton" onclick="showform()">Přidat komentář</span>
+                    </div>       
+                    <div class="comments">     
+                    <div class="comment">
+                        <div class="commentHeader">
+                            25.3.2018 - Prdola
+                        </div>
+                        Uz se na to vykasli
+                    </div>
+                    <div class="comment">
+                            <div class="commentHeader">
+                                25.3.2018 - Prdola
+                            </div>
+                            Uz se na to vykasli
+                        </div>
+                        <div class="comment">
+                                <div class="commentHeader">
+                                    25.3.2018 - Prdola
+                                </div>
+                                Uz se na to vykasliafsdfas sfsadfasf fsafasf
+                            </div>
+                            
+                            <div class="comment">
+                                    <div class="commentHeader">
+                                        25.3.2018 - Prdola
+                                    </div>
+                                    Uz se na to vykasli
+                                </div>
+                                </div>
+                        </div>
         </div>
     </div>
     <div id="gallery" class="gallery">
         <div class="buttons">
-                <span class="button fa  fa-step-backward" onclick="prevGalleryImage();"></span>
-                <span class="button fa  fa-step-forward" onclick="nextGalleryImage();"></span>
+                <span class="button fa  fa-arrow-left" onclick="prevGalleryImage();"></span>
+                <span class="button fa  fa-arrow-right " onclick="nextGalleryImage();"></span>
                
                 <span class="button fa  fa-play" onclick="playGallery();"></span>
                 <span class="button fa  fa-pause" onclick="pauseGallery();"></span>
@@ -83,12 +131,63 @@
         </div>
        
     </div>
+    <div id="addCommentForm" class="addCommentForm">
+          <form>
+              <h3>Vložte komentář</h3>
+              <label>Jméno:</label>
+              <input id="nickName" type="text">
+              <label>komentář:</label>
+              <textarea id="commentText"></textarea>
+              <div class="g-recaptcha" data-sitekey="6Le-2V8UAAAAAAT-MNwySH6wfy07-I93dzi2wOnm"></div>
+              <button class="formbutton">Odeslat</button>
+          </form>
+           
+        </div>
     <!-- <script>
                         w3.slideshow(".headfoto", 4000);
                     </script>
                 </header>-->
 
+<script>
+    showComments(false);
+    function collapse(timeo)
+    {
+        if(timeo == null)
+            timeo = 5000;
+        var elem = document.querySelector('.title');
+        if(dectime != null)
+        {
+            window.clearTimeout(dectime);
+            dectime = null;
+            elem.classList.add("collapsed");
+            return;
+        }
+        window.setTimeout(function()
+        {
+            elem.classList.add("collapsed");
+        },timeo);
+    }
+    collapse();
 
+    var dectime = null;
+    function decollapse()
+    {
+        var elem = document.querySelector('.title');
+        if(dectime == null)
+            dectime = window.setTimeout(function()
+            {
+                dectime = null;
+                elem.classList.remove("collapsed");
+            },1000);
+    }
+    function showform()
+    {
+        var form = document.getElementById("addCommentForm");
+        form.style.display="flex";
+        var nickName = document.getElementById("nickName");
+        nickName.focus();
+    }
+</script>
 
 </body>
 

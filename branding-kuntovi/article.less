@@ -1,19 +1,68 @@
 @import "common.less";
 
-
+body
+{
+  
+    @media @desktop
+    {
+        display: flex;
+        flex-direction: column;       
+        height: 100%;
+        overflow: hidden;
+    }
+}
     .title
     {
-       
+     
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
         position: relative;
+        &.collapsed
+        {
+             height:5cm;
+      
+            overflow: hidden;
+            .middle
+            {
+             position: relative;
+             top:-70%;
+            }
+        }
+       
         .banner
         {
            
+            width:100%;
+       
             img
             {
+              
                 border: 1px solid @colorMain;
                 width:100%;
                
             }
+            
+        }
+        .infos
+        {
+           
+            position: absolute;
+            padding: 2*@stdpadding;
+            left:0px;
+            top:0px;
+            color: @colorInverse;
+            width:100%;
+            display: flex;
+            flex-flow: row-reverse;
+           .button
+           {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2*@stdpadding;
+           
+          
+                cursor: pointer;
+         
+           }
         }
         .summary
         {
@@ -37,32 +86,94 @@
     
 .wrapper
 {
+    @media @desktop
+    {
+    display:flex;
+    flex-flow: row nowrap;
+   width: 100%;
+   max-height: 100%;
+    }
     .set1
     {
+       
         @media @desktop
         {
-            width: 70%;
-            display: inline-block;
-            vertical-align: top;
+           
+          
+            flex: 70% 1 0;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
     }
     .set2
     {
+    
         @media @desktop
         {
-            border: 1px solid @colorMain;
-            width: 30%;
-            display: inline-block;
-            max-height: 100%;
-            overflow-y: auto;
+           display: flex;
+         
+            flex: 30% 1 0;
+       
+         
+            overflow-y: hidden;
+            overflow-y: hidden;
+          
         }
     }
     
 }
+.scrollColumn
+{
+    @media @desktop
+    {
+        
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        box-sizing: border-box;
+       
+    }
+}
+.sidecommentary
+{
+    @media @desktop
+    {
+    display: flex;
+    flex-direction: column;
+    }
+    width: 100%;
+    background: @colorInverse;
+   
+    .header
+    {
+        border-top: 1px solid @colorMain;
+        text-align: right;
+        border-bottom: 1px solid @colorMain;
+        padding: 2*@stdpadding;
+       
+    }
+    .comments
+    {
+       padding: 2*@stdpadding;
+       .scrollColumn();
+     
+        .comment
+        {
 
+            .commentHeader
+            {
+                color:@colorMain;
+            }
+            color: black;
+            width: 100%;
+            margin-bottom: 2*@stdpadding;
+            padding:@stdpadding;
+        }
+    }
+}
 .sidegallery
 {
-   
+    .scrollColumn();
     .galitem
     {
         img {
@@ -70,23 +181,18 @@
            
             box-sizing: border-box;
             border-bottom: 1px solid @colorMain;
-            &::hover
+            
+        }
+        &::hover
             {
                 cursor: pointer;
             }
-        }
     }
 }
 .gallery
 {
     display:none;
-    width:100%;
-    height: 100%;
-    position: fixed;
-    left:0px;
-    top:0px;
-    background: rgba(0,0,0,0.9);
-    text-align: center;    
+    .overlayContainer();
     img
     {
       
@@ -168,10 +274,72 @@
 }
 .content
 {
+    display: inline-block;
     padding: @stdpadding;
+  
 }
 
 
 .noscroll {
     overflow: hidden;
+}
+
+.addCommentForm
+{
+    display: none;
+    .overlayContainer();
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+    form
+    {
+        background: @colorInverse;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid @colorMain;
+        padding:2*@stdpadding;
+        width:80%;
+        @media @desktop
+        {
+            width:50%;
+        }
+    }
+    h3
+    {
+        color: @colorMain;
+    }
+    label
+    {
+        color:@colorMain;
+    }
+    input {
+        box-shadow: unset;
+        border: unset;
+        padding: @stdpadding;
+        border-bottom: 1px solid @colorMain;
+        margin-bottom: 4*@stdpadding;
+        outline: none;
+        transition: 0.4s;
+    }
+    input:focus
+    {
+        border: unset;
+        box-shadow: unset;
+        border-bottom: 1px solid @colorMain;
+    }
+    textarea {
+        box-shadow: unset;
+        margin-bottom: 4*@stdpadding;
+        padding: @stdpadding;
+        border: 1px solid @colorMain;
+        min-height: 4cm;
+
+    }
+    .formbutton
+    {
+        
+        align-self:flex-end;
+    }
 }
