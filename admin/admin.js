@@ -73,7 +73,11 @@ var dbc = function () {
         }).on('error', function (err) {
             console.error("SYNC: " + err);
         });
-        imgdb.replicate.to(remoteimg);
+        imgdb.replicate.to(remoteimg).on('complete', function () {
+            console.log("SYNC IMG: OK");
+        }).on('error', function (err) {
+            console.error("SYNC IMG: " + err);
+        });
     }
 
    
