@@ -6,7 +6,7 @@
     
             host: 'www.kuntaci.cz',
             protocol: 'http',
-            port: 5984,
+            port: 80,
           //  auth: {
           //      user: 'login',
           //      pass: 'secret'
