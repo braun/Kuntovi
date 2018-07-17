@@ -74,10 +74,10 @@ var dbc = function () {
             console.error("SYNC: " + err);
         });
         imgdb.replicate.to(remoteimg).on('complete', function () {
-            console.log("SYNCIMG: OK");
+            console.log("SYNC IMG: OK");
         }).on('error', function (err) {
-            console.error("SYNCIMG: " + err);
-        });;
+            console.error("SYNC IMG: " + err);
+        });
     }
 
    
