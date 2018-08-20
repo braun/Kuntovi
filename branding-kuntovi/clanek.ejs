@@ -132,12 +132,12 @@
        
     </div>
     <div id="addCommentForm" class="addCommentForm">
-          <form>
+          <form onsubmit="event.preventDefault(); submitComment(this);">
               <h3>Vložte komentář</h3>
               <label>Jméno:</label>
-              <input id="nickName" type="text">
+              <input id="nickName" name="nickName" type="text">
               <label>komentář:</label>
-              <textarea id="commentText"></textarea>
+              <textarea id="commentText" name="commentText"></textarea>
               <div class="g-recaptcha" data-sitekey="6Le-2V8UAAAAAAT-MNwySH6wfy07-I93dzi2wOnm"></div>
               <button class="formbutton">Odeslat</button>
           </form>

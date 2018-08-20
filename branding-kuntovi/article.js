@@ -114,3 +114,9 @@ function minimizeGalleryImage()
     btExpand.classList.remove("hidden");
     btCompress.classList.add("hidden");
 }
+
+function submitComment(form)
+{
+    var fd = new FormData(form);
+    if(fd.get("nickName"))
+}
