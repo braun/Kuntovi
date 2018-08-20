@@ -68,15 +68,15 @@ var dbc = function () {
             console.error("SYNC: Cannot sync, not logged on");
             return;
         }
-        db.replicate.to(remotedb).on('complete', function () {
+        db.replicate.to(remotedb,{ timeout: false,since:0 }).on('complete', function () {
             console.log("SYNC: OK");
         }).on('error', function (err) {
-            console.error("SYNC: " + err);
+            console.error("SYNC: " + err.code + ", "+err.message);
         });
-        imgdb.replicate.to(remoteimg).on('complete', function () {
+        imgdb.replicate.to(remoteimg,{ timeout: false,since:0 }).on('complete', function () {
             console.log("SYNC IMG: OK");
         }).on('error', function (err) {
-            console.error("SYNC IMG: " + err);
+            console.error("SYNC IMG: " + err.code+ ", "+err.message);
         });
     }
 
